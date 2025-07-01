@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Venture Launcher Community</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="nav">
+    <h1>Venture <span>Launcher</span></h1>
+    <nav>
+      <a href="#ask">Ask</a>
+      <a href="#trending">Trending</a>
+      <a href="#resources">Resources</a>
+      <a href="#directory">Directory</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#investor-wall">Investor Wall</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Announcement -->
+    <section class="announcement">🚨 New: Join our weekly pitch thread this Friday!</section>
+
+    <!-- Ask a Question -->
+    <section id="ask" class="ask-box">
+      <h2>Ask a Question</h2>
+      <textarea id="questionInput" placeholder="What's your question?"></textarea>
+      <div class="options">
+        <label><input type="checkbox" id="anonToggle" /> Ask Anonymously</label>
+        <button onclick="postQuestion()">Post</button>
+      </div>
+    </section>
+
+    <!-- Trending Questions -->
+    <section id="trending">
+      <h2>🔥 Trending Questions</h2>
+      <div id="questionFeed"></div>
+    </section>
+
+    <!-- Investor Ask Wall -->
+    <section id="investor-wall">
+      <h2>💬 Investor Ask Wall</h2>
+      <textarea id="askWallInput" placeholder="Looking for intros, feedback, etc."></textarea>
+      <button onclick="postInvestorAsk()">Post Request</button>
+      <div id="askWallFeed"></div>
+    </section>
+
+    <!-- Pitch Practice Threads -->
+    <section id="pitch-practice">
+      <h2>🎤 Pitch Practice</h2>
+      <input id="pitchInput" placeholder="Write your 30-sec pitch..." />
+      <button onclick="postPitch()">Submit Pitch</button>
+      <ul id="pitchList"></ul>
+    </section>
+
+    <!-- Resource Sharing -->
+    <section id="resources">
+      <h2>📚 Resource Sharing Hub</h2>
+      <ul>
+        <li><a href="#">Pitch Deck Template</a></li>
+        <li><a href="#">Investor Email Scripts</a></li>
+        <li><a href="#">Fundraising Timeline</a></li>
+      </ul>
+    </section>
+
+    <!-- Startup Milestones -->
+    <section id="milestones">
+      <h2>🚀 Startup Milestones</h2>
+      <ul>
+        <li><strong>LoopAI</strong> raised Seed Round – 💸 $1M</li>
+        <li><strong>QuickFleet</strong> launched V2 Platform 🚀</li>
+        <li><strong>Credity</strong> crossed 10k users 🎉</li>
+      </ul>
+    </section>
+
+    <!-- Directory -->
+    <section id="directory">
+      <h2>🧑‍💼 Member Directory</h2>
+      <div class="profile">
+        <strong>Sana Kapoor</strong> – Founder ✅<br />
+        <small>Fintech | Delhi</small>
+      </div>
+      <div class="profile">
+        <strong>Ravi Jain</strong> – Investor ✅<br />
+        <small>Seed stage | Mumbai</small>
+      </div>
+    </section>
+
+    <!-- Leaderboard -->
+    <section id="leaderboard">
+      <h2>🏆 Top Contributors</h2>
+      <ol>
+        <li>Aditi Mehra – 120 upvotes</li>
+        <li>Kunal Rathi – 105 upvotes</li>
+        <li>Nina D'Souza – 92 upvotes</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Venture Launcher Community</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
