@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venture Launcher - Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      height: 100vh;
+      overflow: hidden;
+      color: #fff;
+      background: #0d0d1a;
+      position: relative;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -3;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: rgba(10, 10, 15, 0.85);
+      z-index: -2;
+    }
+
+    .login-wrapper {
+      display: flex;
+      height: 100vh;
+      width: 100%;
+    }
+
+    .left-side {
+      flex: 1;
+      background: url('startup-side.jpg') center/cover no-repeat;
+    }
+
+    .right-side {
+      flex: 1;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      text-align: center;
+      backdrop-filter: blur(12px);
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .right-side h1 {
+      color: #ffd36e;
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .right-side .tagline {
+      color: #ccc;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .btn-container, .email-form, .google-form {
+      width: 80%;
+      max-width: 350px;
+    }
+
+    .btn-container button, .email-form button, .google-form button {
+      padding: 0.75rem;
+      font-size: 1rem;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s;
+      width: 100%;
+      margin-bottom: 1rem;
+    }
+
+    .google-btn {
+      background-color: #fff;
+      color: #333;
+    }
+
+    .google-btn:hover {
+      background-color: #e0e0e0;
+    }
+
+    .email-btn {
+      background-color: #4d80e4;
+      color: #fff;
+    }
+
+    .email-btn:hover {
+      background-color: #3b6ed1;
+    }
+
+    .email-form, .google-form {
+      display: none;
+      flex-direction: column;
+    }
+
+    .email-form input, .google-form input {
+      padding: 0.6rem;
+      margin-bottom: 1rem;
+      border-radius: 6px;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .email-form button, .google-form button {
+      background-color: #ff8c42;
+      color: white;
+    }
+
+    .email-form button:hover, .google-form button:hover {
+      background-color: #e57b34;
+    }
+
+    .new-link {
+      margin-top: 1.5rem;
+      color: #bbb;
+      font-size: 0.9rem;
+    }
+
+    .new-link a {
+      color: #ffd36e;
+      text-decoration: none;
+    }
+
+    .new-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .login-wrapper {
+        flex-direction: column;
+      }
+
+      .left-side {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="bgVideo">
+    <source src="galaxy.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+
+  <div class="login-wrapper">
+    <div class="left-side"></div>
+
+    <div class="right-side">
+      <h1>Welcome to Venture Launcher</h1>
+      <p class="tagline">Vision Meets Venture — Whether you're launching or investing, your journey starts here.</p>
+
+      <div class="btn-container" id="btnContainer">
+        <button class="google-btn" onclick="showGoogleForm()">Continue with Google</button>
+        <button class="email-btn" onclick="showEmailForm()">Sign in with Email</button>
+      </div>
+
+      <!-- Email Sign-up Form -->
+      <form class="email-form" id="emailForm" onsubmit="submitEmailForm(event)">
+        <input type="text" placeholder="First name" required />
+        <input type="text" placeholder="Last name" required />
+        <input type="email" placeholder="Email" required />
+        <input type="password" placeholder="Password (min 8 characters)" minlength="8" required />
+        <button type="submit">Join</button>
+      </form>
+
+      <!-- Google Sign-up Form -->
+      <form class="google-form" id="googleForm" onsubmit="submitGoogleForm(event)">
+        <input type="text" placeholder="Google Name" required />
+        <input type="email" placeholder="Google Email" required />
+        <button type="submit">Continue</button>
+      </form>
+
+      <div class="new-link">
+        New here? <a href="#">Join now</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showEmailForm() {
+      document.getElementById("btnContainer").style.display = "none";
+      document.getElementById("emailForm").style.display = "flex";
+    }
+
+    function showGoogleForm() {
+      document.getElementById("btnContainer").style.display = "none";
+      document.getElementById("googleForm").style.display = "flex";
+    }
+
+    function submitEmailForm(event) {
+      event.preventDefault();
+      console.log("Email signup submitted");
+      window.location.href = "community.html";
+    }
+
+    function submitGoogleForm(event) {
+      event.preventDefault();
+      console.log("Google signup submitted");
+      window.location.href = "community.html";
+    }
+  </script>
+</body>
+</html>

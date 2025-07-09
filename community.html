@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Venture Launcher Community</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://kit.fontawesome.com/a2e0f2beeb.js" crossorigin="anonymous"></script>
+  <style>
+    :root {
+      --primary: #ffd36e;
+      --text-light: #eaecef;
+      --bg-dark: rgba(10, 10, 15, 0.85);
+      --shadow: rgba(255, 211, 110, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      color: var(--text-light);
+      background: transparent;
+      overflow-x: hidden;
+    }
+
+    #bgVideo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      min-width: 100%;
+      min-height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background: var(--bg-dark);
+      z-index: -1;
+    }
+
+    header.nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 3rem;
+      border-bottom: 1px solid #333;
+      backdrop-filter: blur(8px);
+      background: rgba(0, 0, 0, 0.4);
+    }
+
+    header.nav h1 {
+      font-size: 2.2rem;
+      color: var(--primary);
+      letter-spacing: 0.5px;
+    }
+
+    header.nav nav a {
+      margin-left: 1.5rem;
+      color: var(--text-light);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    header.nav nav a:hover {
+      color: var(--primary);
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 2rem auto;
+      padding: 1rem 2rem;
+    }
+
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 300px;
+    }
+
+    .hero-text h1 {
+      font-size: 3.2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    .hero-text p {
+      font-size: 1.3rem;
+      line-height: 1.7;
+      color: #ccc;
+    }
+
+    .hero-img {
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-img img {
+      width: 100%;
+      max-width: 520px;
+      border-radius: 24px;
+      box-shadow: 0 0 25px var(--shadow);
+      transition: transform 0.3s;
+    }
+
+    .hero-img img:hover {
+      transform: scale(1.03);
+    }
+
+    .announcement {
+      font-size: 1.25rem;
+      background: rgba(255, 211, 110, 0.2);
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      font-style: italic;
+    }
+
+    h2 {
+      border-left: 5px solid var(--primary);
+      padding-left: 1rem;
+      color: var(--primary);
+      margin: 3rem 0 1.5rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+
+    textarea, input[type="text"] {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: none;
+      border-radius: 10px;
+      margin-top: 0.5rem;
+      background: #222;
+      color: white;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      border: none;
+      border-radius: 8px;
+      margin-top: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background: #f0c244;
+    }
+
+    .tag-list span, .wall-post {
+      display: inline-block;
+      background: #333;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      margin: 0.25rem;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+    }
+
+    .question {
+      background: #1e1e2f;
+      padding: 1.2rem;
+      border-radius: 12px;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 0 10px rgba(255, 211, 110, 0.1);
+    }
+
+    .fullscreen-video {
+      display: flex;
+      flex-direction: row-reverse;
+      height: 100vh;
+      padding: 0;
+      margin: 0;
+    }
+
+    .fullscreen-video video {
+      width: 50%;
+      height: 100vh;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .fullscreen-video .content {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    #resources .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+
+    #resources .resource-grid .question {
+      background: #1e1e2f;
+      padding: 2rem;
+      border-radius: 16px;
+    }
+
+    #milestones ul {
+      list-style: none;
+      padding: 0;
+      text-align: center;
+    }
+
+    #milestones ul li {
+      margin: 1rem 0;
+      font-size: 1.1rem;
+    }
+
+    .spacer {
+      height: 3rem;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <video autoplay muted loop id="bgVideo">
+    <source src="galaxy.mp4" type="video/mp4">
+  </video>
+  <div class="overlay"></div>
+
+  <header class="nav">
+    <h1>Venture Launcher</h1>
+    <nav>
+      <a href="#ask">Ask</a>
+      <a href="#trending">Trending</a>
+      <a href="#resources">Resources</a>
+      <a href="#directory">Directory</a>
+      <a href="#milestones">Milestones</a>
+      <a href="#investor-wall">Investor Wall</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>Empower Your Venture</h1>
+        <p>Join the ecosystem where startups ignite innovation and investors amplify potential. Let’s build the future together.</p>
+      </div>
+      <div class="hero-img">
+        <img src="b8784d03-de9a-4686-9882-c564d01dabd7.png" alt="Hero" />
+      </div>
+    </section>
+
+    <section class="announcement">
+      🚀 Fuel your vision — where innovation meets capital and dreams take flight.
+    </section>
+
+    <section class="fullscreen-video" id="ask">
+      <div class="content">
+        <h2 style="text-align:right">Ask a Question</h2>
+        <textarea placeholder="What's your question?"></textarea>
+        <label><input type="checkbox"> Ask anonymously</label><br>
+        <button>Post</button>
+      </div>
+      <video autoplay muted loop>
+        <source src="study.mp4" type="video/mp4">
+      </video>
+    </section>
+
+    <section id="trending">
+      <h2>🔥 Trending Questions</h2>
+      <div class="question">
+        <img src="default-avatar.png" class="avatar"> <strong>You</strong>
+        <p>How do I pitch to an early-stage VC?</p>
+        <button>👍 Upvote</button> <button>💬 Comment</button>
+      </div>
+    </section>
+
+    <section id="investor-wall">
+      <h2>💬 Investor Ask Wall</h2>
+      <textarea placeholder="Looking for intros, feedback, etc."></textarea>
+      <button>Post Request</button>
+      <div class="wall-post">🧠 Looking for intros to angels in health-tech space.</div>
+    </section>
+
+    <section id="pitch-practice">
+      <h2>🎤 Pitch Practice</h2>
+      <input type="text" placeholder="Write your 30-sec pitch...">
+      <button>Submit Pitch</button>
+    </section>
+
+    <section id="resources">
+      <h2>📚 Resource Sharing Hub</h2>
+      <div class="resource-grid">
+        <div class="question">
+          <h4>📄 Pitch Deck Template</h4>
+          <p>A powerful investor-ready template.</p>
+          <a href="#">Download</a>
+        </div>
+        <div class="question">
+          <h4>📘 Startup Guidebook</h4>
+          <p>Essential steps to launch and grow your startup.</p>
+          <a href="#">Download</a>
+        </div>
+        <div class="question">
+          <h4>📊 Investor Checklist</h4>
+          <p>What investors look for in early-stage startups.</p>
+          <a href="#">Download</a>
+        </div>
+        <div class="question">
+          <h4>🧠 Startup Psychology</h4>
+          <p>How founders manage mindset & decision-making.</p>
+          <a href="#">Download</a>
+        </div>
+        <div class="question">
+          <h4>💼 Legal Basics</h4>
+          <p>Important contracts & compliance tips.</p>
+          <a href="#">Download</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section id="milestones">
+      <h2>🚀 Startup Milestones</h2>
+      <ul>
+        <li><strong>LoopAI</strong> raised Seed Round – 💸 $1M</li>
+        <li><strong>QuickFleet</strong> launched V2 Platform 🚀</li>
+        <li><strong>Credity</strong> crossed 10k users 🎉</li>
+      </ul>
+    </section>
+
+    <div class="spacer"></div>
+
+    <section class="fullscreen-video" id="directory">
+      <video autoplay muted loop>
+        <source src="coworkers.mp4" type="video/mp4">
+      </video>
+      <div class="content">
+        <h2>🧑‍💼 Member Directory</h2>
+        <div class="question">
+          <img src="default-avatar.png" class="avatar"> <strong>Sana Kapoor</strong> <span>Founder</span>
+          <p>Fintech | Delhi</p>
+        </div>
+        <div class="question">
+          <img src="default-avatar.png" class="avatar"> <strong>Ravi Jain</strong> <span>Investor</span>
+          <p>Seed Stage | Mumbai</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Venture Launcher Community</p>
+  </footer>
+</body>
+</html>
