@@ -7,6 +7,14 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Background Video -->
+  <video autoplay muted loop id="bgVideo">
+    <source src="galaxy.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+
+  <!-- Header -->
   <header class="nav">
     <h1>Venture <span>Launcher</span></h1>
     <nav>
@@ -20,7 +28,6 @@
   </header>
 
   <main class="container">
-    <!-- Announcement -->
     <section class="announcement">🚨 New: Join our weekly pitch thread this Friday!</section>
 
     <!-- Ask a Question -->
@@ -30,6 +37,16 @@
       <div class="options">
         <label><input type="checkbox" id="anonToggle" /> Ask Anonymously</label>
         <button onclick="postQuestion()">Post</button>
+      </div>
+    </section>
+
+    <!-- Trending Tags -->
+    <section id="trending-tags">
+      <h2>🏷️ Trending Tags</h2>
+      <div id="tagsContainer" class="tag-list"></div>
+      <div class="tag-input">
+        <input type="text" id="tagInput" placeholder="Add a tag..." />
+        <button onclick="addTag()">Add</button>
       </div>
     </section>
 
@@ -47,7 +64,7 @@
       <div id="askWallFeed"></div>
     </section>
 
-    <!-- Pitch Practice Threads -->
+    <!-- Pitch Practice -->
     <section id="pitch-practice">
       <h2>🎤 Pitch Practice</h2>
       <input id="pitchInput" placeholder="Write your 30-sec pitch..." />
@@ -55,7 +72,7 @@
       <ul id="pitchList"></ul>
     </section>
 
-    <!-- Resource Sharing -->
+    <!-- Resources -->
     <section id="resources">
       <h2>📚 Resource Sharing Hub</h2>
       <ul>
@@ -65,7 +82,7 @@
       </ul>
     </section>
 
-    <!-- Startup Milestones -->
+    <!-- Milestones -->
     <section id="milestones">
       <h2>🚀 Startup Milestones</h2>
       <ul>
@@ -91,11 +108,7 @@
     <!-- Leaderboard -->
     <section id="leaderboard">
       <h2>🏆 Top Contributors</h2>
-      <ol>
-        <li>Aditi Mehra – 120 upvotes</li>
-        <li>Kunal Rathi – 105 upvotes</li>
-        <li>Nina D'Souza – 92 upvotes</li>
-      </ol>
+      <ol></ol>
     </section>
   </main>
 

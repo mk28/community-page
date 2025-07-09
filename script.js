@@ -1,8 +1,8 @@
 let questions = [];
 let savedQuestions = [];
 let leaderboard = {};
+let trendingTags = ["Fundraising", "Pitch", "Networking", "SaaS"];
 
-// ========== Post a Question ==========
 function postQuestion() {
   const input = document.getElementById("questionInput");
   const anon = document.getElementById("anonToggle").checked;
@@ -23,7 +23,6 @@ function postQuestion() {
   renderQuestions();
 }
 
-// ========== Render Questions ==========
 function renderQuestions() {
   const feed = document.getElementById("questionFeed");
   feed.innerHTML = "";
@@ -31,33 +30,29 @@ function renderQuestions() {
   questions.forEach((q, index) => {
     const div = document.createElement("div");
     div.className = "question";
-
     div.innerHTML = `
       <strong>${q.user}</strong>
       <p>${q.text}</p>
       <p class="meta">Upvotes: ${q.upvotes}</p>
-      <button class="upvote-btn" onclick="upvote(${index})">👍 Upvote</button>
-      <button class="save-btn" onclick="saveAnswer(${index})">🔖 Save</button>
-      <button class="reply-btn" onclick="toggleCommentBox(${index})">💬 Comment</button>
+      <button onclick="upvote(${index})">👍 Upvote</button>
+      <button onclick="saveAnswer(${index})">🔖 Save</button>
+      <button onclick="toggleCommentBox(${index})">💬 Comment</button>
       <div class="comment-section" id="comment-${index}" style="display:none;">
         <div>${q.comments.map(c => `<p>💭 ${c}</p>`).join("")}</div>
         <input type="text" placeholder="Add a comment..." onkeydown="addComment(event, ${index})" />
       </div>
     `;
-
     feed.appendChild(div);
   });
 
   updateLeaderboard();
 }
 
-// ========== Upvote ==========
 function upvote(index) {
   questions[index].upvotes++;
   renderQuestions();
 }
 
-// ========== Save Answer ==========
 function saveAnswer(index) {
   const saved = questions[index];
   if (!savedQuestions.includes(saved)) {
@@ -68,7 +63,6 @@ function saveAnswer(index) {
   }
 }
 
-// ========== Commenting System ==========
 function toggleCommentBox(index) {
   const box = document.getElementById(`comment-${index}`);
   box.style.display = box.style.display === "none" ? "block" : "none";
@@ -84,7 +78,6 @@ function addComment(e, index) {
   }
 }
 
-// ========== Investor Ask Wall ==========
 function postInvestorAsk() {
   const input = document.getElementById("askWallInput");
   const text = input.value.trim();
@@ -95,11 +88,9 @@ function postInvestorAsk() {
   div.innerText = `🧠 ${text}`;
   document.getElementById("askWallFeed").prepend(div);
   input.value = "";
-
   showNotification("📢 New investor request posted!");
 }
 
-// ========== Pitch Practice ==========
 function postPitch() {
   const input = document.getElementById("pitchInput");
   const text = input.value.trim();
@@ -109,21 +100,17 @@ function postPitch() {
   li.innerHTML = `🎤 ${text}`;
   document.getElementById("pitchList").prepend(li);
   input.value = "";
-
   showNotification("🚀 New pitch submitted for feedback.");
 }
 
-// ========== Notification ==========
 function showNotification(text) {
   const notif = document.createElement("div");
   notif.className = "announcement";
   notif.innerText = text;
   document.querySelector("main").prepend(notif);
-
   setTimeout(() => notif.remove(), 4000);
 }
 
-// ========== Leaderboard (Mocked) ==========
 function updateLeaderboard() {
   leaderboard["You"] = questions.reduce((acc, q) => acc + (q.user === "You" ? q.upvotes : 0), 0);
   const top = Object.entries(leaderboard)
@@ -134,5 +121,23 @@ function updateLeaderboard() {
   list.innerHTML = top.map(([user, score]) => `<li>${user} – ${score} upvotes</li>`).join("");
 }
 
-// Initialize
+// Trending Tags
+function renderTags() {
+  const container = document.getElementById("tagsContainer");
+  container.innerHTML = trendingTags.map(tag => `<span class="tag">#${tag}</span>`).join("");
+}
+
+function addTag() {
+  const input = document.getElementById("tagInput");
+  const tag = input.value.trim();
+  if (!tag) return alert("Please enter a tag.");
+  if (trendingTags.includes(tag)) return alert("Tag already exists.");
+
+  trendingTags.unshift(tag);
+  if (trendingTags.length > 10) trendingTags.pop();
+  input.value = "";
+  renderTags();
+}
+
 renderQuestions();
+renderTags();

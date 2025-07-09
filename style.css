@@ -1,26 +1,41 @@
-/* ========== GLOBAL STYLES ========== */
+/* === Background Video === */
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(10, 10, 15, 0.7);
+  z-index: -1;
+}
+
+/* === Global === */
 body {
   font-family: 'Segoe UI', sans-serif;
-  background-color: #0e0f13; /* dark theme background */
   color: #eaecef;
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  background: transparent;
 }
 
-/* ========== HEADER NAV ========== */
 header.nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0e0f13;
+  background-color: transparent;
   padding: 1rem 2rem;
   border-bottom: 1px solid #333;
-}
-
-.logo-section img.logo {
-  height: 40px;
-  width: auto;
+  backdrop-filter: blur(8px);
 }
 
 header.nav a {
@@ -28,21 +43,18 @@ header.nav a {
   color: #eaecef;
   text-decoration: none;
   font-weight: 500;
-  transition: color 0.3s ease;
 }
 
 header.nav a:hover {
   color: #ffd36e;
 }
 
-/* ========== MAIN CONTAINER ========== */
 main {
   max-width: 1000px;
   margin: 2rem auto;
   padding: 1rem 2rem;
 }
 
-/* ========== SECTIONS ========== */
 section {
   margin-bottom: 2rem;
 }
@@ -54,7 +66,6 @@ h2 {
   margin-bottom: 1rem;
 }
 
-/* ========== CARDS & THREADS ========== */
 .question,
 .wall-post,
 .comment-section,
@@ -66,10 +77,8 @@ h2 {
   margin-bottom: 1rem;
   backdrop-filter: blur(6px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
-/* ========== BUTTONS ========== */
 button {
   background-color: #4d80e4;
   border: none;
@@ -79,14 +88,12 @@ button {
   border-radius: 4px;
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.3s ease;
 }
 
 button:hover {
   background-color: #3b6ed1;
 }
 
-/* ========== INPUT FIELDS ========== */
 input[type="text"],
 textarea {
   width: 100%;
@@ -98,12 +105,10 @@ textarea {
   margin-bottom: 1rem;
 }
 
-/* ========== COMMENT SECTION ========== */
 .comment-section input[type="text"] {
   margin-top: 0.5rem;
 }
 
-/* ========== PITCH LIST & RESOURCES ========== */
 ul {
   padding-left: 1.2rem;
 }
@@ -112,23 +117,50 @@ ul li {
   margin-bottom: 0.5rem;
 }
 
-/* ========== LEADERBOARD ========== */
 #leaderboard ol {
   list-style: decimal inside;
   padding-left: 0;
   margin: 0;
 }
 
-/* ========== MISC ========== */
 .meta {
   font-size: 0.85rem;
   color: #a2a7b7;
   margin-top: 0.2rem;
 }
 
-hr {
-  border: none;
-  height: 1px;
-  background-color: #333;
-  margin: 2rem 0;
+/* === Trending Tags === */
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.tag-list .tag {
+  background-color: rgba(255, 211, 110, 0.15);
+  color: #ffd36e;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  border: 1px solid #ffd36e;
+  box-shadow: 0 0 8px rgba(255, 211, 110, 0.4);
+  animation: floatTag 4s ease-in-out infinite;
+}
+
+@keyframes floatTag {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+
+.tag-list .tag:hover {
+  box-shadow: 0 0 12px #ffd36e, 0 0 20px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+
+.tag-input {
+  display: flex;
+  gap: 10px;
 }
